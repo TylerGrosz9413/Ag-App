@@ -1,6 +1,8 @@
-
+using Microsoft.OpenApi.Models;
 using Ag_app.Data;
 using Microsoft.EntityFrameworkCore;
+using Ag_app.Repositories;
+using Ag_app.Mappings;
 
 namespace Ag_app
 {
@@ -13,11 +15,28 @@ namespace Ag_app
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
+            
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.AddServer(new OpenApiServer
+                {
+                    Description = "Development Server",
+                    Url = "https://localhost:7270"
+                });
+            });
 
             builder.Services.AddDbContext<AgDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("AgConnectionString")));
 
+            builder.Services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
             var app = builder.Build();
+
+            app.UseSwagger().UseSwaggerUI();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -30,12 +49,12 @@ namespace Ag_app
             app.UseStaticFiles();
             app.UseRouting();
 
-
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller}/{action=Index}/{id?}");
+                pattern: "{controller}/{action=index}/{id?}");
 
             app.MapFallbackToFile("index.html");
+            
 
             app.Run();
         }
