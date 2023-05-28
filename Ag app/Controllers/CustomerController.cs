@@ -1,4 +1,5 @@
 ﻿using Ag_app.Data;
+using Ag_app.Domain.Entities;
 using Ag_app.DTO;
 using Ag_app.Repositories;
 using AutoMapper;
@@ -30,6 +31,60 @@ namespace Ag_app.Controllers
 
             // return DTOs
             return Ok(mapper.Map<List<CustomerDto>>(customerDomain));
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var customerDomain = await customerRepository.GetByIdAsync(id);
+            if (customerDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<CustomerDto>(customerDomain));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AddCustomerDto addCustomerDto)
+        {
+            // map or convert from dto to domain model
+            var customerDomain = mapper.Map<Customer>(addCustomerDto);
+            // add to database
+            customerDomain = await customerRepository.CreateAsync(customerDomain);
+
+            var customerDto = mapper.Map<CustomerDto>(customerDomain);
+            return CreatedAtAction(nameof(GetById), new { id = customerDto.Id }, customerDto);
+            
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCustomerDto updateCustomerDto)
+        {
+            var customerDomain = mapper.Map<Customer>(updateCustomerDto);
+            customerDomain = await customerRepository.UpdateAsync(id, customerDomain);
+
+            if (customerDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<CustomerDto>(customerDomain));
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
+        {
+            var customerDomain = await customerRepository.DeleteAsync(id);
+            if (customerDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<CustomerDto>(customerDomain));
         }
 
     }

@@ -31,6 +31,7 @@ namespace Ag_app
             options.UseSqlServer(builder.Configuration.GetConnectionString("AgConnectionString")));
 
             builder.Services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
+            builder.Services.AddScoped<IRequestRepository, SQLRequestRepository>();
 
             builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

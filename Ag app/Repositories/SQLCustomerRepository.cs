@@ -12,11 +12,11 @@ namespace Ag_app.Repositories
         {
             this.dbContext = dbContext;
         }
-        public async Task<List<Customer>> CreateAsync(Customer customer)
+        public async Task<Customer> CreateAsync(Customer customer)
         {
             await dbContext.Customers.AddAsync(customer);
             await dbContext.SaveChangesAsync();
-            return new List<Customer> { customer };
+            return customer;
         }
 
         public async Task<Customer?> DeleteAsync(Guid id)
@@ -38,7 +38,7 @@ namespace Ag_app.Repositories
 
         public async Task<Customer?> GetByIdAsync(Guid id)
         {
-            return await dbContext.Customers.FirstOrDefaultAsync();
+            return await dbContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Customer?> UpdateAsync(Guid id, Customer customer)

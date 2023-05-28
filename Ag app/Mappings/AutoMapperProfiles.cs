@@ -9,7 +9,12 @@ namespace Ag_app.Mappings
         public AutoMapperProfiles() 
         {
             CreateMap<Customer, CustomerDto>().ReverseMap();
-            
+            CreateMap<AddCustomerDto, Customer>().ReverseMap();
+            CreateMap<UpdateCustomerDto, Customer>().ReverseMap();
+            CreateMap<Retailer, RetailerDto>().ReverseMap();
+            CreateMap<Request, RequestDto>().ReverseMap();
+            CreateMap<AddRequestDto, Request>().ReverseMap();
+            CreateMap<Recommendation, RecommendationDto>().ReverseMap();
         }
 
     }
