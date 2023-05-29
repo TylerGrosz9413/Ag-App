@@ -39,7 +39,8 @@ namespace Ag_app.Repositories
 
         public async Task<Request?> GetByIdAsync(Guid id)
         {
-            return await dbContext.Requests.FirstOrDefaultAsync(r => r.Id == id);
+            return await dbContext.Requests
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<Request?> UpdateAsync(Guid id, Request request)

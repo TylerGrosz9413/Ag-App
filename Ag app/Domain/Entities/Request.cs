@@ -3,7 +3,8 @@
     public class Request
     {
         public Guid Id { get; set; }
-        public Customer Customer { get; set; }
+        public Guid CustomerId { get; set; }
         public string Product { get; set; }
+        
     }
 }

@@ -17,6 +17,9 @@ namespace Ag_app.Data
         public DbSet<Request> Requests { get; set; }
         public DbSet<Recommendation> Recommendations { get; set;}
 
+        
+
+
 
     }
 }

@@ -9,7 +9,7 @@ namespace Ag_app.DTO
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public List<RecommendationDto> Recommendations { get; set; }
+        
 
     }
 }

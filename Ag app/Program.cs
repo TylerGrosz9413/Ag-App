@@ -30,6 +30,7 @@ namespace Ag_app
             builder.Services.AddDbContext<AgDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("AgConnectionString")));
 
+            // injecting dependencies
             builder.Services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
             builder.Services.AddScoped<IRequestRepository, SQLRequestRepository>();
 

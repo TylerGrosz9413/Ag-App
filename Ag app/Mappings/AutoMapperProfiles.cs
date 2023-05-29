@@ -14,6 +14,7 @@ namespace Ag_app.Mappings
             CreateMap<Retailer, RetailerDto>().ReverseMap();
             CreateMap<Request, RequestDto>().ReverseMap();
             CreateMap<AddRequestDto, Request>().ReverseMap();
+            CreateMap<UpdateRequestDto, Request>().ReverseMap();
             CreateMap<Recommendation, RecommendationDto>().ReverseMap();
         }
 

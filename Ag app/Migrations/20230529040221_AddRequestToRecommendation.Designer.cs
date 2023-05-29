@@ -4,6 +4,7 @@ using Ag_app.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ag_app.Migrations
 {
     [DbContext(typeof(AgDbContext))]
-    partial class AgDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230529040221_AddRequestToRecommendation")]
+    partial class AddRequestToRecommendation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,6 +95,8 @@ namespace Ag_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Requests");
                 });
 
@@ -139,6 +144,17 @@ namespace Ag_app.Migrations
                     b.Navigation("Request");
 
                     b.Navigation("Retailer");
+                });
+
+            modelBuilder.Entity("Ag_app.Domain.Entities.Request", b =>
+                {
+                    b.HasOne("Ag_app.Domain.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Ag_app.DTO
 {
@@ -9,6 +10,6 @@ namespace Ag_app.DTO
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-
+        
     }
 }

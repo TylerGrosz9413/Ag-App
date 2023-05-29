@@ -56,6 +56,34 @@ namespace Ag_app.Controllers
             var requestDto = mapper.Map<RequestDto>(requestDomain);
 
             return CreatedAtAction(nameof(GetById), new { id = requestDto.Id }, requestDto);
+            
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRequestDto updateRequestDto)
+        {
+            var requestDomain = mapper.Map<Request>(updateRequestDto);
+            requestDomain = await requestRepository.UpdateAsync(id, requestDomain);
+            if (requestDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<RequestDto>(requestDomain));
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var requestDomain = await requestRepository.DeleteAsync(id);
+            if (requestDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<RequestDto>(requestDomain));
         }
 
     }
