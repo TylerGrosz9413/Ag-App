@@ -12,10 +12,14 @@ namespace Ag_app.Mappings
             CreateMap<AddCustomerDto, Customer>().ReverseMap();
             CreateMap<UpdateCustomerDto, Customer>().ReverseMap();
             CreateMap<Retailer, RetailerDto>().ReverseMap();
+            CreateMap<AddRetailerDto, Retailer>().ReverseMap();
+            CreateMap<UpdateRetailerDto, Retailer>().ReverseMap();
             CreateMap<Request, RequestDto>().ReverseMap();
             CreateMap<AddRequestDto, Request>().ReverseMap();
             CreateMap<UpdateRequestDto, Request>().ReverseMap();
             CreateMap<Recommendation, RecommendationDto>().ReverseMap();
+            CreateMap<AddRecommendationDto, Recommendation>().ReverseMap();
+            CreateMap<UpdateRecommendationDto, Recommendation>().ReverseMap();
         }
 
     }

@@ -33,6 +33,8 @@ namespace Ag_app
             // injecting dependencies
             builder.Services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
             builder.Services.AddScoped<IRequestRepository, SQLRequestRepository>();
+            builder.Services.AddScoped<IRecommendationRepository, SQLRecommendationRepository>();
+            builder.Services.AddScoped<IRetailerRepository, SQLRetailerRepository>();
 
             builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
