@@ -7,7 +7,7 @@ namespace Ag_app.Data
 {
     public class AgDbContext : DbContext
     {
-        public AgDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
+        public AgDbContext(DbContextOptions<AgDbContext> dbContextOptions): base(dbContextOptions)
         {
 
         }
