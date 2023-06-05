@@ -3,6 +3,7 @@ using Ag_app.Domain.Entities;
 using Ag_app.DTO;
 using Ag_app.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -11,6 +12,7 @@ namespace Ag_app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Customer")]
     public class RequestController : ControllerBase
     {
         private readonly AgDbContext dbContext;

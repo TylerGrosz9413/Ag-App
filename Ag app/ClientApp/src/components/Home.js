@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class Home extends Component {
-  static displayName = Home.name;
+export function Home() {
 
-  render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
+        <h1>Welome!</h1>
+        <p>We connect farmers and retailers</p>
         <ul>
           <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
           <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
@@ -23,4 +21,4 @@ export class Home extends Component {
       </div>
     );
   }
-}
+

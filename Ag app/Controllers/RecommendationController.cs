@@ -3,6 +3,7 @@ using Ag_app.Domain.Entities;
 using Ag_app.DTO;
 using Ag_app.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Formats.Asn1;
@@ -11,6 +12,7 @@ namespace Ag_app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Retailer")]
     public class RecommendationController : ControllerBase
     {
         private readonly AgDbContext dbContext;

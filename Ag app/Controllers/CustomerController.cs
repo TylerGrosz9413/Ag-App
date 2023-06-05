@@ -11,7 +11,7 @@ namespace Ag_app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Customer")]
     public class CustomerController : ControllerBase
     {
         private readonly AgDbContext dbContext;
