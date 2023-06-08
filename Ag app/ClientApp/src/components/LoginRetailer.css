@@ -1,17 +1,27 @@
 ﻿body {
-    
 }
+
 h1 {
     text-align: center;
 }
+
+button {
+    margin-left: 450px;
+    margin-right: 450px;
+}
+
 
 
 .exampleInputEmail1 {
     padding-left: 300px;
 }
 
-.form {
-    margin-top: 100px;
+.form-group {
+    margin-left: 450px;
+    margin-right: 450px;
+}
+
+.register {
     margin-left: 450px;
     margin-right: 450px;
 }

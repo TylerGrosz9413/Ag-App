@@ -41,7 +41,13 @@ namespace Ag_app.Controllers
 
                     if (identityResult.Succeeded)
                     {
-                        return Ok("User was registered! Please login.");
+                        var token = tokenRepository.CreateJWTToken(identityUser, registerDto.Roles.ToList());
+                        var response = new LoginResponseDto
+                        {
+                            JwtToken = token
+                        };
+                        return Ok(response);
+                        //return Ok("User is registered. Please log in.");
                     }
                 }
             }

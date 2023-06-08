@@ -1,0 +1,30 @@
+﻿body {
+}
+
+h1 {
+    text-align: center;
+}
+
+
+.form {
+    margin-top: 100px;
+    margin-left: 450px;
+    margin-right: 450px;
+}
+
+.form-group {
+    width: 300px;
+}
+
+.parent {
+}
+
+.child {
+    display: inline-block;
+    width: 400px;
+}
+
+.error {
+    margin-left: 450px;
+    margin-right: 450px;
+}
