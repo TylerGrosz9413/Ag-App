@@ -1,6 +1,8 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './RetailerDashboard.css';
+import { RetailerNavBar } from './RetailerNavBar';
 
 
 export function RetailerDashboard() {
@@ -8,10 +10,34 @@ export function RetailerDashboard() {
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
     const userEmail = localStorage.getItem('userEmail');
+    const navigate = useNavigate();
+
+    async function handleDelete(id) {
+     
+        setError('');
+        try {
+            const response3 = await axios.delete(`https://localhost:7270/api/Recommendation/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            alert(`The request with id ${id} has been deleted. Reload the page to see your requests.`)
+
+        } catch (error) {
+            console.log("error")
+
+            setError('Sorry, something went wrong.')
+        }
+    }
+
+    async function handleUpdate(recommendationId) {
+
+        localStorage.setItem('recommendationId', recommendationId);
+
+        navigate('/update-recommendation')
+    }
 
     useEffect(() => {
 
-        //try {
         const response = axios.get('https://localhost:7270/api/Recommendation', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -33,40 +59,27 @@ export function RetailerDashboard() {
 
                 }
             })
-        //const customerRequets = []
-        //for (const req of requests) {
-        //    if (req.customerId === localStorage.getItem('id')) {
-        //        setRequests([req])
-        //    }
-        //}
+        
         console.log(recommendations)
-        // if (response.status === 200) {
 
-
-
-
-        // }
-
-        //} catch (error) {
-        //    console.log("error")
-
-        //    setError('Sorry, something went wrong.')
-        //}
     }, [token])
 
     return (
         <div>
+            <RetailerNavBar />
             <h1>Recommendations</h1>
-            {/*<p>Account: {localStorage.getItem('id')}</p>*/}
-            {/*<button onClick={handleClick} type="submit" class="btn btn-primary">Get Requests</button>*/}
+            
             {recommendations.filter(rec => rec.retailerId === localStorage.getItem('id'))
                 .map((recommendation) => {
                     return (
-                        <div>
+                        <div className="recommendation">
                             <p>Id: {recommendation.id}</p>
                             <p>Product: {recommendation.product}</p>
                             <p>Price: {recommendation.price}</p>
-                            <p>Request: {recommendation.requestId}</p>
+                            <p>Request Id: {recommendation.requestId}</p>
+                            <button onClick={() => handleUpdate(recommendation.id)} className="update">Update</button>
+                            <button onClick={() => handleDelete(recommendation.id)} className="delete">Delete</button>
+                            
                         </div>
                     )
                 })}

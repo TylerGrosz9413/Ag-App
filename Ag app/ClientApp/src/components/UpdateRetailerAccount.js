@@ -1,37 +1,33 @@
-﻿import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import { RetailerNavBar } from './RetailerNavBar';
 
-export function CreateCustomer() {
-    const navigate = useNavigate();
+
+export function UpdateRetailerAccount() {
+
+    const [error, setError] = useState('');
+    const token = localStorage.getItem('token');
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const retailerId = localStorage.getItem('id');
+    const userEmail = localStorage.getItem('userEmail');
 
-    async function handleCreate(e) {
-        e.preventDefault();
-        setError('');
-        const token = localStorage.getItem('token')
+    async function handleUpdate() {
+        //e.preventDefault();
         try {
-            const response = await axios.post('https://localhost:7270/api/Customer', {
+            const response = axios.put(`https://localhost:7270/api/Retailer/${retailerId}`, {
                 name,
                 address,
                 phoneNumber,
                 email
             }, {
-                headers: { 'Authorization':`Bearer ${token}`}
+                headers: { 'Authorization': `Bearer ${token}` }
             });
-            console.log(response.status)
-            console.log(response)
-
-            if (response.status === 200 || response.status === 201) {
-
-                console.log("Success!")
-                navigate('/customer-dashboard');
-            }
+            alert('You have updated your account.')
         } catch (error) {
             console.log("error")
 
@@ -39,10 +35,19 @@ export function CreateCustomer() {
         }
     }
 
+    async function get() {
+        const response = axios.get(`https://localhost:7270/api/Retailer/${retailerId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        })
+            .then((result) => {
+                console.log(result.data)
+            })
+    }
+
     return (
         <div>
-            <h1>Tell us more about yourself</h1>
-            <form onSubmit={handleCreate}>
+            <RetailerNavBar />
+            <form onSubmit={() => handleUpdate()}>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name"
@@ -55,7 +60,7 @@ export function CreateCustomer() {
                     <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)} />
-                    
+
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone Number</label>
@@ -66,7 +71,7 @@ export function CreateCustomer() {
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)} />
 
@@ -75,9 +80,9 @@ export function CreateCustomer() {
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <div>
-                {error && <p>{error}</p>}
-            </div>
+            <p>{retailerId}</p>
+            <p>{error}</p>
+            <button onClick={() => get()}>get</button>
         </div>
     )
 

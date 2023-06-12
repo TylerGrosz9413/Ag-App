@@ -53,6 +53,7 @@ export function RegisterRetailer() {
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)} />
+                    <small id="emailHelp" class="form-text text-muted">Password must contain at least 1 uppercase letter, lowercase letter, number, special character, and unique character and be at least 6 characters long.</small>
                 </div>
                 <div class="form-group form-check">
                 </div>

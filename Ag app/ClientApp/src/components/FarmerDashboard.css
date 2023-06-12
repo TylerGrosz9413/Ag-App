@@ -1,0 +1,31 @@
+﻿body {
+}
+
+p {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 100px;
+}
+
+.request {
+    margin-bottom: 50px;
+    display: inline-block;
+}
+
+button {
+    display: inline-block;
+}
+
+.update {
+    background-color: yellow;
+}
+
+.delete {
+    background-color: red;
+    
+}
+.span {
+    display: inline-block;
+}

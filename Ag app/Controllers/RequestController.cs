@@ -12,7 +12,6 @@ namespace Ag_app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Customer")]
     public class RequestController : ControllerBase
     {
         private readonly AgDbContext dbContext;
@@ -27,6 +26,7 @@ namespace Ag_app.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Customer, Retailer")]
         public async Task<IActionResult> GetAll()
         {
             var requestDomain = await requestRepository.GetAllAsync();
@@ -36,6 +36,7 @@ namespace Ag_app.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Customer, Retailer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var requestDomain = await requestRepository.GetByIdAsync(id);
@@ -49,6 +50,7 @@ namespace Ag_app.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Create([FromBody] AddRequestDto addRequestDto)
         {
 
@@ -63,6 +65,7 @@ namespace Ag_app.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRequestDto updateRequestDto)
         {
             var requestDomain = mapper.Map<Request>(updateRequestDto);
@@ -77,6 +80,7 @@ namespace Ag_app.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var requestDomain = await requestRepository.DeleteAsync(id);

@@ -64,7 +64,7 @@ export function LoginRetailer() {
             </div>
 
             <p className="register">Don't have an account?</p>
-            <a className="register" href="/register-retailer">Register</a>
+            <a className="register-link" href="/register-retailer">Register</a>
         </div>
     );
 }

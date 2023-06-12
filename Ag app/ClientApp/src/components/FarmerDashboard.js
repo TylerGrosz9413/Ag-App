@@ -1,39 +1,45 @@
 ﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './FarmerDashboard.css';
+import { FarmerNavBar } from './FarmerNavBar';
 
 
-export function CustomerDashboard() {
+export function FarmerDashboard() {
     const [requests, setRequests] = useState([]);
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
+    /*const customerId = localStorage.getItem('id');*/
     const userEmail = localStorage.getItem('userEmail');
+    const [requestId, setRequestId] = useState('');
+    const [product, setProduct] = useState('');
+    const navigate = useNavigate();
 
-    //async function handleClick(e) {
-    //    e.preventDefault();
-    //    setError('');
-    //    try {
-    //        const response = await axios.get('https://localhost:7270/api/Request', {
-    //            headers: { 'Authorization': `Bearer ${token}` }
-    //        });
+    async function handleDelete(id) {
+        /*e.preventDefault();*/
+        setError('');
+        try {
+            const response3 = await axios.delete(`https://localhost:7270/api/Request/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
 
-    //        if (response.status === 200) {
-    //            console.log('Success!');
-    //            console.log(response);
-    //            setRequests(response.data)
-    //        }
+           alert(`The request with id ${id} has been deleted. Reload the page to see your requests.`)
 
-    //    } catch (error) {
-    //        console.log("error")
+        } catch (error) {
+            console.log("error")
 
-    //        setError('Sorry, something went wrong.')
-    //    }
-    //}
+            setError('Sorry, something went wrong.')
+        }
+    }
+
+    async function handleUpdate(requestId) {
+        localStorage.setItem('requestId', requestId);
+        navigate('/update-request');
+    }
 
     useEffect(() => {
         
-        //try {
-        const response = axios.get('https://localhost:7270/api/Request', {
+        const response1 = axios.get('https://localhost:7270/api/Request', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then((result) => {
@@ -54,44 +60,33 @@ export function CustomerDashboard() {
                     
                 }
             })
-        //const customerRequets = []
-        //for (const req of requests) {
-        //    if (req.customerId === localStorage.getItem('id')) {
-        //        setRequests([req])
-        //    }
-        //}
+
         console.log(requests)
-        // if (response.status === 200) {
-        
-        
-        
 
-           // }
-
-        //} catch (error) {
-        //    console.log("error")
-
-        //    setError('Sorry, something went wrong.')
-        //}
     }, [token])
 
     
 
     return (
         <div>
+            <FarmerNavBar />
+            
             <h1>Requests</h1>
-            {/*<button onClick={handleClick} type="submit" class="btn btn-primary">Get Requests</button>*/}
             {requests.filter(req => req.customerId === localStorage.getItem('id'))
                 .map((request) => {
                 return (
-                    <div>
+                    <div className="request">
                         <p>Id: {request.id}</p>
                         
                         <p>Product: {request.product}</p>
+                        <span className="span">
+                        <button onClick={() => handleUpdate(request.id)} className="update">Update</button>
+                        <button onClick={() => handleDelete(request.id)} className="delete">Delete</button>
+                        </span>
                     </div>
                 )
             }) }
-            <p>{localStorage.getItem('id')}</p>
+            
 
         </div>
     )

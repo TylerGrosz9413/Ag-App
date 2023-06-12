@@ -5,10 +5,17 @@ import { RegisterFarmer } from "./components/RegisterFarmer";
 import { RegisterRetailer } from "./components/RegisterRetailer";
 import { LoginFarmer } from "./components/LoginFarmer";
 import { LoginRetailer } from "./components/LoginRetailer";
-import { CreateCustomer } from "./components/CreateCustomer";
+import { CreateFarmer } from "./components/CreateFarmer";
 import { CreateRetailer } from "./components/CreateRetailer";
-import { CustomerDashboard } from './components/CustomerDashboard';
+import { FarmerDashboard } from './components/FarmerDashboard';
 import { RetailerDashboard } from './components/RetailerDashboard';
+import { UpdateRecommendation } from "./components/UpdateRecommendation";
+import { UpdateRequest } from "./components/UpdateRequest";
+import { AllRequests } from "./components/AllRequests";
+import { FarmerAccount } from "./components/FarmerAccount";
+import { UpdateFarmerAccount } from "./components/UpdateFarmerAccount";
+import { RetailerAccount } from "./components/RetailerAccount"
+import { UpdateRetailerAccount } from "./components/UpdateRetailerAccount";
 
 const AppRoutes = [
   {
@@ -41,19 +48,47 @@ const AppRoutes = [
     },
     {
         path: '/create-farmer',
-        element: <CreateCustomer />
+        element: <CreateFarmer />
     },
     {
         path: '/create-retailer',
         element: <CreateRetailer />
     },
     {
-        path: '/customer-dashboard',
-        element: <CustomerDashboard />
+        path: '/farmer-dashboard',
+        element: <FarmerDashboard />
     },
     {
         path: '/retailer-dashboard',
         element: <RetailerDashboard />
+    },
+    {
+        path: '/update-recommendation',
+        element: <UpdateRecommendation />
+    },
+    {
+        path: '/update-request',
+        element: <UpdateRequest />
+    }, 
+    {
+        path: '/all-requests',
+        element: <AllRequests />
+    },
+    {
+        path: '/farmer-account',
+        element: <FarmerAccount />
+    }, 
+    {
+        path: '/update-farmer-account',
+        element: <UpdateFarmerAccount />
+    }, 
+    {
+        path: '/retailer-account',
+        element: <RetailerAccount />
+    },
+    {
+        path: '/update-retailer-account',
+        element: <UpdateRetailerAccount />
     }
 ];
 

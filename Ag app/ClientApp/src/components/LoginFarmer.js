@@ -30,7 +30,7 @@ export function LoginFarmer() {
                 console.log(decoded)
                 var userEmail = localStorage.getItem('userEmail')
                 console.log(userEmail)
-                navigate('/customer-dashboard')
+                navigate('/farmer-dashboard')
             }
         } catch (error) {
             console.log("error")
@@ -64,7 +64,7 @@ export function LoginFarmer() {
                 </div>
 
                 <p className="register">Don't have an account?</p>
-                <a className="register" href="/register-farmer">Register</a>
+                <a className="register-link" href="/register-farmer">Register</a>
             </div>
         );
     }
