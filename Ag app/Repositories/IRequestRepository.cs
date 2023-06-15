@@ -9,6 +9,7 @@ namespace Ag_app.Repositories
         Task<Request> CreateAsync(Request request);
         Task<Request?> UpdateAsync(Guid id, Request request);
         Task<Request?> DeleteAsync(Guid id);
+        Task<List<Request>> GetByCustomerIdAsync(Guid id);
     }
 }
 

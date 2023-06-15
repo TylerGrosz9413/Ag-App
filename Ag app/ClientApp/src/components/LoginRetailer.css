@@ -10,7 +10,9 @@ button {
     margin-right: 450px;
 }
 
-
+p {
+    color: black;
+}
 
 .exampleInputEmail1 {
     padding-left: 300px;

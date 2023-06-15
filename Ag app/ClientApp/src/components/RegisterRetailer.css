@@ -5,15 +5,23 @@ h1 {
     text-align: center;
 }
 
+small {
+    color: black;
+    background-color: white;
+}
 
 .form {
-    margin-top: 100px;
     margin-left: 450px;
-    margin-right: 450px;
+    margin-right: 0px;
+    
 }
 
 .form-group {
     width: 300px;
+}
+.small {
+    color: black;
+    background-color: aliceblue;
 }
 
 .parent {

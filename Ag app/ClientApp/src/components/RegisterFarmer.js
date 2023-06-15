@@ -19,18 +19,13 @@ export function RegisterFarmer() {
                 password,
                 roles
             });
-            console.log(response.status)
-            console.log(response)
 
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 localStorage.setItem('token', response.data.jwtToken)
                 localStorage.setItem('userEmail', username)
-                console.log("Success!")
                 navigate('/create-farmer');
             }
         } catch (error) {
-            console.log("error")
-            
             setError('Sorry, something went wrong.')
         }
     }
@@ -38,8 +33,9 @@ export function RegisterFarmer() {
     return (
         <div>
             <h1>Register: Farmer</h1>
+
             <form onSubmit={handleRegister}>
-                <div class="form-group">
+                <div className="form-group" class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                         value={username}
@@ -51,15 +47,17 @@ export function RegisterFarmer() {
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)} />
-                    <small id="emailHelp" class="form-text text-muted">Password must contain at least 1 uppercase letter, lowercase letter, number, special character, and unique character and be at least 6 characters long.</small>
+                    <small id="emailHelp" className="small" class="form-text text-muted small">Password must contain at least 1 uppercase letter, lowercase letter, number, special character, and unique character and be at least 6 characters long.</small>
                 </div>
                 <div class="form-group form-check">
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
-            </form>
+                </form>
+
             <div>
                 {error && <p>{error}</p>}
-            </div>
+                </div>
+
         </div>
         );
     }

@@ -14,12 +14,11 @@ export function UpdateRetailerAccount() {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
     const retailerId = localStorage.getItem('id');
-    const userEmail = localStorage.getItem('userEmail');
 
     async function handleUpdate() {
-        //e.preventDefault();
+
         try {
-            const response = axios.put(`https://localhost:7270/api/Retailer/${retailerId}`, {
+            const response1 = axios.put(`https://localhost:7270/api/Retailer/${retailerId}`, {
                 name,
                 address,
                 phoneNumber,
@@ -29,20 +28,10 @@ export function UpdateRetailerAccount() {
             });
             alert('You have updated your account.')
         } catch (error) {
-            console.log("error")
-
             setError('Sorry, something went wrong.')
         }
     }
 
-    async function get() {
-        const response = axios.get(`https://localhost:7270/api/Retailer/${retailerId}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        })
-            .then((result) => {
-                console.log(result.data)
-            })
-    }
 
     return (
         <div>
@@ -80,9 +69,8 @@ export function UpdateRetailerAccount() {
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <p>{retailerId}</p>
             <p>{error}</p>
-            <button onClick={() => get()}>get</button>
+           
         </div>
     )
 

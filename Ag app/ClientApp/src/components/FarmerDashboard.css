@@ -3,6 +3,8 @@
 
 p {
     text-align: center;
+    background-color: white;
+    
 }
 
 h1 {
@@ -12,6 +14,8 @@ h1 {
 .request {
     margin-bottom: 50px;
     display: inline-block;
+    
+    
 }
 
 button {
@@ -25,6 +29,9 @@ button {
 .delete {
     background-color: red;
     
+}
+.recommendations {
+    background-color: green;
 }
 .span {
     display: inline-block;

@@ -1,5 +1,3 @@
-import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { RegisterFarmer } from "./components/RegisterFarmer";
 import { RegisterRetailer } from "./components/RegisterRetailer";
@@ -16,20 +14,16 @@ import { FarmerAccount } from "./components/FarmerAccount";
 import { UpdateFarmerAccount } from "./components/UpdateFarmerAccount";
 import { RetailerAccount } from "./components/RetailerAccount"
 import { UpdateRetailerAccount } from "./components/UpdateRetailerAccount";
+import { CreateRequest } from "./components/CreateRequest";
+import { CreateRecommendation } from "./components/CreateRecommendation";
+import { ViewRecommendations } from "./components/ViewRecommendations";
+import { RetailerDetails } from "./components/RetailerDetails";
 
 const AppRoutes = [
   {
     index: true,
     element: <Home />
   },
-  {
-    path: '/counter',
-    element: <Counter />
-  },
-  {
-    path: '/fetch-data',
-    element: <FetchData />
-    },
     {
         path: '/register-farmer',
         element: <RegisterFarmer />
@@ -89,6 +83,22 @@ const AppRoutes = [
     {
         path: '/update-retailer-account',
         element: <UpdateRetailerAccount />
+    },
+    {
+        path: '/create-request',
+        element: <CreateRequest />
+    },
+    {
+        path: '/create-recommendation',
+        element: <CreateRecommendation />
+    },
+    {
+        path: '/view-recommendations',
+        element: <ViewRecommendations />
+    },
+    {
+        path: '/retailer-details',
+        element: <RetailerDetails />
     }
 ];
 

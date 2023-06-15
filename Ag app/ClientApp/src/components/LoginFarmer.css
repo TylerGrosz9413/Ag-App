@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿
 
 h1 {
     text-align: center;
@@ -9,14 +8,16 @@ button {
     margin-right: 450px;
 }
 
-
+p {
+    color: black;
+}
 
 .exampleInputEmail1 {
     padding-left: 300px;
 }
 
 .form-group {
-    
+    align-items: center;
     margin-left: 450px;
     margin-right: 450px;
 }
@@ -24,11 +25,13 @@ button {
 .register {
     margin-left: 450px;
     margin-right: 450px;
+    color: yellow;
 }
 
 .register-link {
     margin-left: 600px;
     margin-right: 450px;
+    color: yellow;
 }
 
 

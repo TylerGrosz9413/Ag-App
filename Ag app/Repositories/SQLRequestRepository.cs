@@ -55,5 +55,10 @@ namespace Ag_app.Repositories
             await dbContext.SaveChangesAsync();
             return existingRequest;
         }
+        public async Task<List<Request>> GetByCustomerIdAsync(Guid id)
+        {
+            return await dbContext.Requests.Where(r => r.CustomerId == id).ToListAsync();
+            
+        }
     }
 }

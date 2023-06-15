@@ -23,17 +23,12 @@ export function LoginFarmer() {
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.jwtToken)
                 localStorage.setItem('userEmail', username)
-                console.log("Success!")
-                console.log(response)
                 var token = localStorage.getItem('token');
                 var decoded = jwt_decode(token);
-                console.log(decoded)
                 var userEmail = localStorage.getItem('userEmail')
-                console.log(userEmail)
                 navigate('/farmer-dashboard')
             }
         } catch (error) {
-            console.log("error")
             setError('Invalid username or password.')
         }
     }

@@ -37,6 +37,16 @@ namespace Ag_app.Controllers
         [HttpGet]
         [Route("{id:Guid}")]
         [Authorize(Roles = "Customer, Retailer")]
+        public async Task<IActionResult> GetAllForCustomer([FromRoute] Guid id)
+        {
+            var requestDomain = await requestRepository.GetByCustomerIdAsync(id);
+
+            return Ok(mapper.Map<List<RequestDto>>(requestDomain));
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        [Authorize(Roles = "Customer, Retailer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var requestDomain = await requestRepository.GetByIdAsync(id);

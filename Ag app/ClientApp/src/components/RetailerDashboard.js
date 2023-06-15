@@ -13,18 +13,15 @@ export function RetailerDashboard() {
     const navigate = useNavigate();
 
     async function handleDelete(id) {
-     
-        setError('');
+
         try {
-            const response3 = await axios.delete(`https://localhost:7270/api/Recommendation/${id}`, {
+            const response1 = await axios.delete(`https://localhost:7270/api/Recommendation/${id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
             alert(`The request with id ${id} has been deleted. Reload the page to see your requests.`)
 
         } catch (error) {
-            console.log("error")
-
             setError('Sorry, something went wrong.')
         }
     }
@@ -38,22 +35,19 @@ export function RetailerDashboard() {
 
     useEffect(() => {
 
-        const response = axios.get('https://localhost:7270/api/Recommendation', {
+        const response2 = axios.get('https://localhost:7270/api/Recommendation', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then((result) => {
-                console.log(result.data);
                 setRecommendations(result.data)
                 return result;
             })
-        const response2 = axios.get('https://localhost:7270/api/Retailer', {
+        const response3 = axios.get('https://localhost:7270/api/Retailer', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then((result2) => {
-                console.log(result2.data)
                 for (const ele of result2.data) {
                     if (ele.email === userEmail) {
-                        console.log(ele.id)
                         localStorage.setItem('id', ele.id);
                     }
 
@@ -73,17 +67,14 @@ export function RetailerDashboard() {
                 .map((recommendation) => {
                     return (
                         <div className="recommendation">
-                            <p>Id: {recommendation.id}</p>
-                            <p>Product: {recommendation.product}</p>
-                            <p>Price: {recommendation.price}</p>
-                            <p>Request Id: {recommendation.requestId}</p>
+                            <p>Id: {recommendation.id}, Product: {recommendation.product}, Price: ${recommendation.price}, Request Id: {recommendation.requestId}</p>
                             <button onClick={() => handleUpdate(recommendation.id)} className="update">Update</button>
                             <button onClick={() => handleDelete(recommendation.id)} className="delete">Delete</button>
                             
                         </div>
                     )
                 })}
-            
+            <p>{error}</p>
         </div>
     )
 

@@ -24,17 +24,12 @@ export function CreateFarmer() {
             }, {
                 headers: { 'Authorization':`Bearer ${token}`}
             });
-            console.log(response.status)
-            console.log(response)
-
+            
             if (response.status === 200 || response.status === 201) {
 
-                console.log("Success!")
                 navigate('/farmer-dashboard');
             }
         } catch (error) {
-            console.log("error")
-
             setError('Sorry, something went wrong.')
         }
     }

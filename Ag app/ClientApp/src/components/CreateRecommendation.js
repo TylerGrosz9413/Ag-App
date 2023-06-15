@@ -1,27 +1,32 @@
-﻿import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { RetailerNavBar } from './RetailerNavBar';
 
-export function UpdateRecommendation() {
-    const [product, setProduct] = useState('');
-    const [price, setPrice] = useState(0);
+
+export function CreateRecommendation() {
+
     const [error, setError] = useState('');
+    const [product, setProduct] = useState('');
+    const [price, setPrice] = useState('');
+    const retailerId = localStorage.getItem('id');
+    const requestId = localStorage.getItem('requestId');
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
-    const recommendationId = localStorage.getItem('recommendationId');
 
-    async function handleUpdate(recommendationId) {
-     
+    async function handleCreate() {
         try {
-            const response = await axios.put(`https://localhost:7270/api/Recommendation/${recommendationId}`, {
+            const response = await axios.post(`https://localhost:7270/api/Recommendation`, {
+                retailerId,
                 product,
-                price
+                price,
+                requestId
             }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
-            alert(`You have updated the product of the request with id ${recommendationId} to ${product} and the price to ${price}. Go to the dashboard to see all of your requests.`);
+            if (response.status === 201) {
+                alert('Your recommendation has been created.')
+            }
 
         } catch (error) {
             setError('Sorry, something went wrong.')
@@ -31,27 +36,25 @@ export function UpdateRecommendation() {
     return (
         <div>
             <RetailerNavBar />
-            <h1>Update Recommendation</h1>
-            <h3>{recommendationId}</h3>
-            <form onSubmit={() => handleUpdate(recommendationId)}>
+            <h1>New Recommendation</h1>
+            <form onSubmit={handleCreate}>
                 <div class="form-group">
-                    <label for="product">Product</label>
+                    <label for="exampleInputEmail1">Product</label>
                     <input type="text" class="form-control" id="product" aria-describedby="emailHelp" placeholder="Enter product name"
                         value={product}
                         onChange={(e) => setProduct(e.target.value)} />
 
                 </div>
                 <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="number" class="form-control" id="price" placeholder="Enter price"
+                    <label for="exampleInputEmail1">Price</label>
+                    <input type="text" class="form-control" id="price" aria-describedby="emailHelp" placeholder="Enter price"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)} />
 
                 </div>
-
                 <div class="form-group form-check">
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div>
                 {error && <p>{error}</p>}

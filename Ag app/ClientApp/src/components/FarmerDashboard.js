@@ -9,25 +9,24 @@ export function FarmerDashboard() {
     const [requests, setRequests] = useState([]);
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
-    /*const customerId = localStorage.getItem('id');*/
     const userEmail = localStorage.getItem('userEmail');
-    const [requestId, setRequestId] = useState('');
-    const [product, setProduct] = useState('');
     const navigate = useNavigate();
 
+    async function showRecommendations(requestId) {
+        localStorage.setItem('requestId', requestId);
+        navigate('/view-recommendations')
+    }
+
     async function handleDelete(id) {
-        /*e.preventDefault();*/
-        setError('');
+
         try {
-            const response3 = await axios.delete(`https://localhost:7270/api/Request/${id}`, {
+            const response1 = await axios.delete(`https://localhost:7270/api/Request/${id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
            alert(`The request with id ${id} has been deleted. Reload the page to see your requests.`)
 
         } catch (error) {
-            console.log("error")
-
             setError('Sorry, something went wrong.')
         }
     }
@@ -39,29 +38,24 @@ export function FarmerDashboard() {
 
     useEffect(() => {
         
-        const response1 = axios.get('https://localhost:7270/api/Request', {
+        const response2 = axios.get('https://localhost:7270/api/Request', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then((result) => {
-                console.log(result.data);
                 setRequests(result.data)
                 return result;
             })
-        const response2 = axios.get('https://localhost:7270/api/Customer', {
+        const response3 = axios.get('https://localhost:7270/api/Customer', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then((result2) => {
-                console.log(result2.data)
                 for (const ele of result2.data) {
                     if (ele.email === userEmail) {
-                        console.log(ele.id)
                         localStorage.setItem('id', ele.id);
                     }
                     
                 }
             })
-
-        console.log(requests)
 
     }, [token])
 
@@ -76,17 +70,16 @@ export function FarmerDashboard() {
                 .map((request) => {
                 return (
                     <div className="request">
-                        <p>Id: {request.id}</p>
-                        
-                        <p>Product: {request.product}</p>
+                        <p>Id: {request.id}, Product: {request.product}</p>
                         <span className="span">
                         <button onClick={() => handleUpdate(request.id)} className="update">Update</button>
-                        <button onClick={() => handleDelete(request.id)} className="delete">Delete</button>
+                            <button onClick={() => handleDelete(request.id)} className="delete">Delete</button>
+                            <button onClick={() => showRecommendations(request.id)} className="recommendations">Recommendations</button>
                         </span>
                     </div>
                 )
             }) }
-            
+            <p>{error}</p>
 
         </div>
     )

@@ -1,7 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 import './RegisterRetailer.css';
 
 
@@ -21,18 +20,13 @@ export function RegisterRetailer() {
                 password,
                 roles
             });
-            console.log(response.status)
-            console.log(response)
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.jwtToken)
                 localStorage.setItem('userEmail', username)
-                console.log("Success!")
                 navigate('/create-retailer');
             }
         } catch (error) {
-            console.log("error")
-
             setError('Sorry, something went wrong.')
         }
     }
@@ -41,6 +35,7 @@ export function RegisterRetailer() {
         <div>
             <h1>Register: Retailer</h1>
             <form onSubmit={handleRegister}>
+            
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
@@ -53,15 +48,17 @@ export function RegisterRetailer() {
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)} />
-                    <small id="emailHelp" class="form-text text-muted">Password must contain at least 1 uppercase letter, lowercase letter, number, special character, and unique character and be at least 6 characters long.</small>
+                    <small id="emailHelp" className="small" class="form-text text-muted">Password must contain at least 1 uppercase letter, lowercase letter, number, special character, and unique character and be at least 6 characters long.</small>
                 </div>
                 <div class="form-group form-check">
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                
             </form>
             <div className="error">
                 {error && <p>{error}</p>}
             </div>
+        
         </div>
     );
 }

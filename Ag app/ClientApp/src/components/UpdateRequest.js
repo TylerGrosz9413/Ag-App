@@ -8,7 +8,6 @@ export function UpdateRequest() {
     const [product, setProduct] = useState('');
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
-    const userEmail = localStorage.getItem('userEmail');
     const navigate = useNavigate();
     const requestId = localStorage.getItem('requestId');
 
@@ -24,8 +23,6 @@ export function UpdateRequest() {
             
             
         } catch (error) {
-            console.log("error")
-
             setError('Sorry, something went wrong.')
         }
         
