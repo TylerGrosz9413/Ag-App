@@ -11,8 +11,8 @@ Several features of the app include:
   * Farmers can update and delete requests and see recommendations made for any of their requests
   * Retailers can update and delete their recommendations
 
-The back end API has a repository layer, asynchronous methods and is secured with JWT authentication with multiple roles for authorization.
-The front end is built with react.
+The backend API has a repository layer, asynchronous methods and is secured with JWT authentication with multiple roles for authorization.
+The frontend is built with react.
 
 ## Built with
   * ASP.NET Core with C#
