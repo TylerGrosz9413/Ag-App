@@ -15,7 +15,7 @@ The back end API has a repository layer, asynchronous methods and is secured wit
 The front end is built with react.
 
 ## Built with
-  * ASP.NET Core(.NET 6) with C#
+  * ASP.NET Core with C#
   * React
   * HTML
   * CSS
