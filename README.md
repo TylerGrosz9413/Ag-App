@@ -1,5 +1,7 @@
 # About the Project
 
+![Farmer Register](\Ag app\ClientApp\src\assets\register-farmer.JPG?raw=true "Register Farmer")
+
 This is an input price management system for farmers. 
 This app serves to connect farmers with retailers and centralize the market for agriculture inputs, making it easier for 
 farmers to procure the inputs they need and helping retailers find customers.
